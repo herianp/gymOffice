@@ -26,7 +26,7 @@
     </table>
     <div class="form-group">
         <h1>Create Message</h1>
-        <form th:action="'/chatbot/createMessage'+ ${currentId}" method="post">
+        <form th:action="'/chatbot/createMessage/'+ ${currentId}" method="post">
             <label for="text">Message</label>
             <textarea id="text" name="text" required class="form-control" rows="2"></textarea>
             <button type="submit" class="btn btn-primary mt-2">Submit</button>
