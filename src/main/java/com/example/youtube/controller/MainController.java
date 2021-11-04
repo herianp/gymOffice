@@ -21,17 +21,25 @@ public class MainController {
     }
 
     @GetMapping
-    public String mainPage(Model model,@RequestParam(required = false) String error_message){
+    public String mainPage(Model model,@RequestParam(required = false) String error_message,
+                           @RequestParam(required = false) String diacriticError){
         model.addAttribute("employeeList",employeeService.findAllEmployee());
 
         if (error_message != null){
             model.addAttribute("error_message",error_message);
+        } else if (diacriticError != null){
+            model.addAttribute("diacriticError",diacriticError);
         }
         return "index";
     }
 
     @PostMapping("/employee")
-    public String createEmployee(@ModelAttribute EmployeeAndMessageDTO employeeAndMessageDTO){
+    public String createEmployee(@ModelAttribute EmployeeAndMessageDTO employeeAndMessageDTO,
+                                 RedirectAttributes redirectAttributes){
+        if(employeeService.diacriticHandler(employeeAndMessageDTO.getName())){
+            redirectAttributes.addAttribute("diacriticError","Please don't use diacritic");
+            return "redirect:/";
+        }
         employeeService.save(employeeAndMessageDTO);
 
         return "redirect:/";
