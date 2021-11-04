@@ -4,10 +4,13 @@ import com.example.youtube.models.EmployeeAndMessageDTO;
 import com.example.youtube.models.MessageDto;
 import com.example.youtube.service.EmployeeService;
 import com.example.youtube.service.MessagesService;
+import com.pusher.rest.Pusher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Collections;
 
 @Controller
 public class MainController {
@@ -91,6 +94,11 @@ public class MainController {
     @PostMapping("/chatbot/createMessage/{id}")
     public String createMessage(@PathVariable Long id,
                                 @RequestParam String text){
+        Pusher pusher = new Pusher("APP_ID", "APP_KEY", "APP_SECRET");
+        pusher.setCluster("APP_CLUSTER");
+
+        pusher.trigger("my-channel", "my-event", Collections.singletonMap("message", "Hello World"));
+
         messagesService.save(text,id);
         return "redirect:/chatbot/" + id;
     }
