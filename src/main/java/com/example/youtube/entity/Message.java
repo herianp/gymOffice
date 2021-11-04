@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -20,6 +22,10 @@ public class Message {
     private Long id;
 
     private String text;
+
+    @CreationTimestamp
+    private LocalDateTime date;
+
 
     @ManyToOne()
     @JoinColumn(name = "employee_id")
