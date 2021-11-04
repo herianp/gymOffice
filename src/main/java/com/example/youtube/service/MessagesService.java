@@ -43,4 +43,12 @@ public class MessagesService {
         }
         return dtoList;
     }
+
+    public void save(String text, Long id) {
+        Message message = new Message();
+        message.setText(text);
+        message.setEmployee(employeeRepository.findById(id).get());
+        employeeRepository.findById(id).get().addMessage(message);
+        employeeRepository.save(employeeRepository.findById(id).get());
+    }
 }

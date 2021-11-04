@@ -11,17 +11,28 @@
     <title>Gym Office</title>
 </head>
 <body>
-<table class="table table-hover table-dark">
-    <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Message</th>
-        <th scope="col">Time</th>
-    </tr>
-    <tr th:each="message : ${messagesList}" th:object="${message}">
-        <th scope="row" th:text="*{employee}">Name</th>
-        <td th:text="*{text}">message</td>
-        <td th:text="*{date}">Time</td>
-    </tr>
-</table>
+<div class="d-flex align-items-start justify-content-around flex-row m-5">
+    <table class="table table-hover table-dark w-50">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Message</th>
+            <th scope="col">Time</th>
+        </tr>
+        <tr th:each="message : ${messagesList}" th:object="${message}">
+            <th scope="row" th:text="*{employee}">Name</th>
+            <td th:text="*{text}">message</td>
+            <td th:text="*{date}">Time</td>
+        </tr>
+    </table>
+    <div class="form-group">
+        <h1>Create Message</h1>
+        <form th:action="'/chatbot/createMessage/'+ ${currentId}" method="post">
+            <label for="text">Message</label>
+            <textarea id="text" name="text" required class="form-control" rows="2"></textarea>
+            <button type="submit" class="btn btn-primary mt-2">Submit</button>
+            <a th:href="'/'" class="btn btn-danger mt-2 text-light">Back</a>
+        </form>
+    </div>
+</div>
 </body>
 </html>
