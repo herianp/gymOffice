@@ -20,7 +20,8 @@
     <form class="form-inline my-2 my-lg-0" th:action="'/chatbot'">
         <p th:if="${error_message} != null" th:text="${error_message}" class="mr-2 mt-3 p-0" th:style="'color:red;'">You have to use real
             Employee</p>
-        <input class="form-control mr-sm-2" type="search" placeholder="Employee" name="employee_name" required>
+        <input class="form-control mr-sm-2" type="search" placeholder="Employee" name="employee_name" required th:value="${usernameValue}">
+        <input class="form-control mr-sm-2" type="password" placeholder="Password" name="employee_password" required>
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">ChatBot</button>
     </form>
 </nav>

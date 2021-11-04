@@ -22,13 +22,18 @@ public class MainController {
 
     @GetMapping
     public String mainPage(Model model,@RequestParam(required = false) String error_message,
-                           @RequestParam(required = false) String diacriticError){
+                           @RequestParam(required = false) String diacriticError,
+                           @RequestParam(required = false) String username){
         model.addAttribute("employeeList",employeeService.findAllEmployee());
 
         if (error_message != null){
             model.addAttribute("error_message",error_message);
         } else if (diacriticError != null){
             model.addAttribute("diacriticError",diacriticError);
+        }
+
+        if (username != null){
+            model.addAttribute("usernameValue",username);
         }
         return "index";
     }
@@ -58,11 +63,19 @@ public class MainController {
 
     @GetMapping("/chatbot")
     public String chatbotCheck(@RequestParam String employee_name,
+                               @RequestParam String employee_password,
                                RedirectAttributes redirectAttributes){
         if(employeeService.findByName(employee_name) == null){
             redirectAttributes.addAttribute("error_message","You have to use real Employee");
             return "redirect:/";
         }
+
+        if (!employeeService.passwordCheck(employee_password,employee_name)){
+            redirectAttributes.addAttribute("error_message","Wrong password for " + employee_name);
+            redirectAttributes.addAttribute("username",employee_name);
+            return "redirect:/";
+        }
+
         Long id = employeeService.findByName(employee_name).get().getId();
         return "redirect:/chatbot/" + id;
     }
