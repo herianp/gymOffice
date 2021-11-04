@@ -18,26 +18,19 @@
         Gym Office
     </a>
     <form class="form-inline my-2 my-lg-0" th:action="'/chatbot'">
+        <p th:if="${error_message} != null" th:text="${error_message}" class="mr-2 mt-3 p-0" th:style="'color:red;'">You have to use real
+            Employee</p>
         <input class="form-control mr-sm-2" type="search" placeholder="Employee" name="employee_name" required>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">ChatBot</button>
     </form>
 </nav>
 
 <div class="d-flex align-items-center flex-column">
     <div>
         <h1>Gym Office Employee</h1>
-        <div th:each="employee : ${employeeList}" th:object="${employee}" class="form-group">
-            <h3 th:text="|Id: *{id}, Name: *{name}|">id, name</h3>
-            <div th:each="message : ${employee.getMessages()}">
-                <p th:text="${message}">message</p>
-            </div>
-            <form th:action="'/employee/message/'+ *{id}" method="post">
-                <label for="message">Add new Message</label>
-                <input id="message" name="text" required class="form-control">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                    else.</small>
-                <button type="submit" class="btn btn-primary">Add</button>
-            </form>
+        <div th:each="employee : ${employeeList}" th:object="${employee}" class="form-group" th:style="'border: solid black 1px;padding:10px;'">
+            <h3 th:text="|Name: *{name}|">id, name</h3>
+            <h3 th:text="|Number of messages: *{messages.size()}|">number of messages</h3>
         </div>
     </div>
     <div>
@@ -48,9 +41,7 @@
                 <input id="name" name="name" required class="form-control w-50">
                 <label for="pass">Password</label>
                 <input id="pass" type="password" name="password" required class="form-control w-50">
-                <label for="text">Message</label>
-                <textarea id="text" name="text" required class="form-control" rows="2"></textarea>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary mt-2">Submit</button>
             </form>
         </div>
     </div>

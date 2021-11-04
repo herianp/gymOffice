@@ -36,10 +36,10 @@ public class EmployeeService {
         employee.setName(employeeDto.getName());
         employee.setPassword(employeeDto.getPassword());
 
-        Message message = new Message();
-        message.setText(employeeandMessageDto.getText());
-
-        employee.addMessage(message);
+//        Message message = new Message();
+//        message.setText(employeeandMessageDto.getText());
+//
+//        employee.addMessage(message);
         Employee savedEmployee = employeeRepository.save(employee);
 
         employeeDto.setId(savedEmployee.getId());

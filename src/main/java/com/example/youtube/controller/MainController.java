@@ -7,6 +7,7 @@ import com.example.youtube.service.MessagesService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class MainController {
@@ -20,8 +21,12 @@ public class MainController {
     }
 
     @GetMapping
-    public String mainPage(Model model){
+    public String mainPage(Model model,@RequestParam(required = false) String error_message){
         model.addAttribute("employeeList",employeeService.findAllEmployee());
+
+        if (error_message != null){
+            model.addAttribute("error_message",error_message);
+        }
         return "index";
     }
 
@@ -32,16 +37,18 @@ public class MainController {
         return "redirect:/";
     }
 
-    @PostMapping("/employee/message/{id}")
-    public String createMessage(@PathVariable Long id,
-                                @ModelAttribute MessageDto messageDto){
-        messagesService.newMessageToEmployee(messageDto,id);
-        return "redirect:/";
-    }
+//    @PostMapping("/employee/message/{id}")
+//    public String createMessage(@PathVariable Long id,
+//                                @ModelAttribute MessageDto messageDto){
+//        messagesService.newMessageToEmployee(messageDto,id);
+//        return "redirect:/";
+//    }
 
     @GetMapping("/chatbot")
-    public String chatbotCheck(@RequestParam String employee_name){
-        if(!employeeService.findByName(employee_name).isPresent()){
+    public String chatbotCheck(@RequestParam String employee_name,
+                               RedirectAttributes redirectAttributes){
+        if(employeeService.findByName(employee_name) == null){
+            redirectAttributes.addAttribute("error_message","You have to use real Employee");
             return "redirect:/";
         }
         Long id = employeeService.findByName(employee_name).get().getId();
