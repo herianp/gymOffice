@@ -15,6 +15,15 @@
     <div th:each="message : ${employee.getMessages()}">
     <h3 th:text="${message}"></h3>
     </div>
+    <form th:action="'/employee'" method="post">
+        <label for="name">Name</label>
+        <input id="name" name="name" required>
+        <label for="pass">Password</label>
+        <input id="pass" type="password" name="password" required>
+        <label for="text">Password</label>
+        <input id="text" name="text" required>
+        <button type="submit">Submit</button>
+    </form>
 </div>
 </body>
 </html>
