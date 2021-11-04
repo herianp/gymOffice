@@ -1,5 +1,6 @@
 package com.example.youtube.controller.api.rest;
 
+import com.example.youtube.models.EmployeeAndMessageDTO;
 import com.example.youtube.models.EmployeeDto;
 import com.example.youtube.models.MessageDto;
 import com.example.youtube.service.EmployeeService;
@@ -23,8 +24,7 @@ public class EmployeeRestController {
     }
 
     @PostMapping
-    public EmployeeDto saveEmployee(@RequestBody EmployeeDto employee,
-                                    @RequestParam MessageDto messageDto){
-        return employeeService.save(employee,messageDto);
+    public EmployeeDto saveEmployee(@RequestBody EmployeeAndMessageDTO employeeAndMessageDTO){
+        return employeeService.save(employeeAndMessageDTO);
     }
 }
