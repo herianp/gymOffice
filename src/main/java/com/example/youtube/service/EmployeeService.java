@@ -66,6 +66,9 @@ public class EmployeeService {
     }
 
     public Optional<EmployeeDto> findByName(String employee_name) {
+        if (employeeRepository.findByName(employee_name) == null){
+            return null;
+        }
         Optional<EmployeeDto> employeeDto = Optional.of(new EmployeeDto());
         Employee employee = employeeRepository.findByName(employee_name);
 
