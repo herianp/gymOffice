@@ -41,7 +41,7 @@ public class MainController {
 
     @GetMapping("/chatbot")
     public String chatbotCheck(@RequestParam String employee_name){
-        if(employeeService.findByName(employee_name).isEmpty()){
+        if(!employeeService.findByName(employee_name).isPresent()){
             return "redirect:/";
         }
         Long id = employeeService.findByName(employee_name).get().getId();
