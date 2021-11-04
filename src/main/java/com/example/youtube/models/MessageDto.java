@@ -16,7 +16,7 @@ public class MessageDto {
 
     private Long id;
     private String text;
-    private LocalDateTime date;
+    private String date;
     private String employee;
 
 }

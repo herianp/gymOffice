@@ -9,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -23,8 +24,9 @@ public class Message {
 
     private String text;
 
+    @Temporal(TemporalType.DATE)
     @CreationTimestamp
-    private LocalDateTime date;
+    private Date date;
 
 
     @ManyToOne()
