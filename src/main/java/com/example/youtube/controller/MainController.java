@@ -36,11 +36,15 @@ public class MainController {
     @PostMapping("/employee")
     public String createEmployee(@ModelAttribute EmployeeAndMessageDTO employeeAndMessageDTO,
                                  RedirectAttributes redirectAttributes){
+
         if(employeeService.diacriticHandler(employeeAndMessageDTO.getName())){
             redirectAttributes.addAttribute("diacriticError","Please don't use diacritic");
             return "redirect:/";
         }
-        employeeService.save(employeeAndMessageDTO);
+        if (employeeService.save(employeeAndMessageDTO) == null){
+            redirectAttributes.addAttribute("diacriticError","Employee already exists");
+            return "redirect:/";
+        }
 
         return "redirect:/";
     }
