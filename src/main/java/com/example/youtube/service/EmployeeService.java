@@ -83,4 +83,15 @@ public class EmployeeService {
         employeeDto.get().setMessages(listOfMessages);
         return employeeDto;
     }
+
+    public boolean diacriticHandler(String name) {
+        String diacritic = "¹²³áàâãäåāăąÀÁÂÃÄÅĀĂĄÆćčç©ĆČÇĐÐèéêёëēĕėęěÈÊËЁĒĔĖĘĚ€ğĞıìíîïìĩīĭÌÍÎÏЇÌĨĪĬłŁńňñŃŇÑòóôõöōŏőøÒÓÔÕÖŌŎŐØŒř®ŘšşșßŠŞȘùúûüũūŭůÙÚÛÜŨŪŬŮýÿÝŸžżźŽŻŹŠšČčŘřŽžóÓ";
+
+        for (Character c : diacritic.toCharArray()){
+            if (name.contains(c.toString())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

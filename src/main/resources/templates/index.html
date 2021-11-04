@@ -36,9 +36,11 @@
     <div>
         <h1>Create new Employee with message</h1>
         <div class="form-group">
+            <p th:if="${diacriticError} != null" th:text="${diacriticError}" th:style="'color:red;'">error</p>
             <form th:action="'/employee'" method="post">
                 <label for="name">Name</label>
                 <input id="name" name="name" required class="form-control w-50">
+                <small id="emailHelp" class="form-text text-muted">Don't use diacritic</small>
                 <label for="pass">Password</label>
                 <input id="pass" type="password" name="password" required class="form-control w-50">
                 <button type="submit" class="btn btn-primary mt-2">Submit</button>
