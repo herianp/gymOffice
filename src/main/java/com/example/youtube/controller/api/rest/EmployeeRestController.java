@@ -24,7 +24,7 @@ public class EmployeeRestController {
 
     @PostMapping
     public EmployeeDto saveEmployee(@RequestBody EmployeeDto employee,
-                                    @RequestBody MessageDto messageDto){
+                                    @RequestParam MessageDto messageDto){
         return employeeService.save(employee,messageDto);
     }
 }
