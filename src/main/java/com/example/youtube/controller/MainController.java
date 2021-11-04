@@ -39,4 +39,10 @@ public class MainController {
         return "redirect:/";
     }
 
+    @GetMapping("/chatbot")
+    public String chatbot(Model model){
+        model.addAttribute("messagesList",messagesService.findAllMessages());
+        return "chatbot";
+    }
+
 }
