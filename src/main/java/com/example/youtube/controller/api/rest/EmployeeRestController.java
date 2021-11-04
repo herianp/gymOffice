@@ -1,6 +1,7 @@
 package com.example.youtube.controller.api.rest;
 
 import com.example.youtube.models.EmployeeDto;
+import com.example.youtube.models.MessageDto;
 import com.example.youtube.service.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,8 @@ public class EmployeeRestController {
     }
 
     @PostMapping
-    public EmployeeDto saveEmployee(@RequestBody EmployeeDto employee){
-        return employeeService.save(employee);
+    public EmployeeDto saveEmployee(@RequestBody EmployeeDto employee,
+                                    @RequestBody MessageDto messageDto){
+        return employeeService.save(employee,messageDto);
     }
 }

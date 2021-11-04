@@ -12,6 +12,9 @@
 <h1>Gym Office Employee</h1>
 <div th:each="employee : ${employeeList}" th:object="${employee}">
     <h3 th:text="|Id: *{id}, Name: *{name}|"></h3>
+    <div th:each="message : ${employee.getMessages()}">
+    <h3 th:text="${message}"></h3>
+    </div>
 </div>
 </body>
 </html>
