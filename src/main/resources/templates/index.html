@@ -13,20 +13,21 @@
 <div th:each="employee : ${employeeList}" th:object="${employee}">
     <h3 th:text="|Id: *{id}, Name: *{name}|"></h3>
     <div th:each="message : ${employee.getMessages()}">
-        <h3 th:text="${message}"></h3>
+        <p th:text="${message}"></p>
     </div>
     <form th:action="'/employee/message/'+ *{id}" method="post">
-        <label for="message">Name</label>
+        <label for="message">Add new Message</label>
         <input id="message" name="text" required>
-        <button type="submit">Submit</button>
+        <button type="submit">Add</button>
     </form>
 </div>
+<h1>Create new Employee with message</h1>
 <form th:action="'/employee'" method="post">
     <label for="name">Name</label>
     <input id="name" name="name" required>
     <label for="pass">Password</label>
     <input id="pass" type="password" name="password" required>
-    <label for="text">Password</label>
+    <label for="text">Message</label>
     <input id="text" name="text" required>
     <button type="submit">Submit</button>
 </form>
