@@ -9,7 +9,9 @@
     <title>Gym Office</title>
 </head>
 <body>
-<h1 th:text="${text}">text</h1>
-<h2>Testing test branch</h2>
+<h1>Gym Office Employee</h1>
+<div th:each="employee : ${employeeList}" th:object="${employee}">
+    <h3 th:text="|Id: *{id}, Name: *{name}|"></h3>
+</div>
 </body>
 </html>
