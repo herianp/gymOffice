@@ -40,9 +40,27 @@ public class MainController {
     }
 
     @GetMapping("/chatbot")
-    public String chatbot(Model model){
+    public String chatbotCheck(@RequestParam String employee_name){
+        if(employeeService.findByName(employee_name).isEmpty()){
+            return "redirect:/";
+        }
+        Long id = employeeService.findByName(employee_name).get().getId();
+        return "redirect:/chatbot/" + id;
+    }
+
+
+    @GetMapping("/chatbot/{id}")
+    public String chatbot(Model model, @PathVariable Long id){
         model.addAttribute("messagesList",messagesService.findAllMessages());
+        model.addAttribute("currentId",id);
         return "chatbot";
+    }
+
+    @PostMapping("/chatbot/createMessage/{id}")
+    public String createMessage(@PathVariable Long id,
+                                @RequestParam String text){
+        messagesService.save(text,id);
+        return "redirect:/chatbot/" + id;
     }
 
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -62,5 +63,21 @@ public class EmployeeService {
             dtoList.add(employeeDto);
         }
         return dtoList;
+    }
+
+    public Optional<EmployeeDto> findByName(String employee_name) {
+        Optional<EmployeeDto> employeeDto = Optional.of(new EmployeeDto());
+        Employee employee = employeeRepository.findByName(employee_name);
+
+        employeeDto.get().setName(employee.getName());
+        employeeDto.get().setId(employee.getId());
+        employeeDto.get().setPassword(employee.getPassword());
+        List<String> listOfMessages = new ArrayList<>();
+        for(Message message : employee.getMessages()){
+            listOfMessages.add(message.getText());
+        }
+
+        employeeDto.get().setMessages(listOfMessages);
+        return employeeDto;
     }
 }

@@ -13,12 +13,14 @@
 <body class="">
 <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="#">
-        <img src="https://img.icons8.com/ios-glyphs/50/000000/flex-biceps.png" width="35" height="35" class="d-inline-block align-top" alt="">
+        <img src="https://img.icons8.com/ios-glyphs/50/000000/flex-biceps.png" width="35" height="35"
+             class="d-inline-block align-top" alt="">
         Gym Office
     </a>
-    <div class="form-inline my-2 my-lg-0">
-        <a class="btn btn-outline-success my-2 my-sm-0" th:href="'/chatbot'" href="#">ChatBot</a>
-    </div>
+    <form class="form-inline my-2 my-lg-0" th:action="'/chatbot'">
+        <input class="form-control mr-sm-2" type="search" placeholder="Employee" name="employee_name" required>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
 </nav>
 
 <div class="d-flex align-items-center flex-column">
