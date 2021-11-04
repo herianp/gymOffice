@@ -39,6 +39,7 @@ public class MessagesService {
             messageDto.setText(m.getText());
             messageDto.setDate(m.getDate());
             messageDto.setEmployee(m.getEmployee().getName());
+            dtoList.add(messageDto);
         }
         return dtoList;
     }
