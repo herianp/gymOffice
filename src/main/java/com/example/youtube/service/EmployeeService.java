@@ -22,10 +22,16 @@ public class EmployeeService {
     }
 
     public EmployeeDto save(EmployeeAndMessageDTO employeeandMessageDto){
-
+        if (employeeRepository.findByName(employeeandMessageDto.getName()) != null){
+            return null;
+        }
         EmployeeDto employeeDto = new EmployeeDto();
-        employeeDto.setPassword(employeeandMessageDto.getPassword());
-        employeeDto.setName(employeeandMessageDto.getName());
+        String password = employeeandMessageDto.getPassword();
+        password = password.trim();
+        employeeDto.setPassword(password);
+        String name = employeeandMessageDto.getName();
+        name = name.trim();
+        employeeDto.setName(name);
 
         List<String> stringList = new ArrayList<>();
         stringList.add(employeeandMessageDto.getText());
@@ -93,5 +99,12 @@ public class EmployeeService {
             }
         }
         return false;
+    }
+
+    public boolean passwordCheck(String employee_password, String employee_name) {
+        if (!employeeRepository.findByName(employee_name).getPassword().equals(employee_password)){
+            return false;
+        }
+        return true;
     }
 }

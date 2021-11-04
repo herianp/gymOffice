@@ -37,7 +37,7 @@ public class MessagesService {
             MessageDto messageDto = new MessageDto();
             messageDto.setId(m.getId());
             messageDto.setText(m.getText());
-            messageDto.setDate(m.getDate());
+            messageDto.setDate(m.getDate().toString());
             messageDto.setEmployee(m.getEmployee().getName());
             dtoList.add(messageDto);
         }
