@@ -100,4 +100,11 @@ public class EmployeeService {
         }
         return false;
     }
+
+    public boolean passwordCheck(String employee_password, String employee_name) {
+        if (!employeeRepository.findByName(employee_name).getPassword().equals(employee_password)){
+            return false;
+        }
+        return true;
+    }
 }
